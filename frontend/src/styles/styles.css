@@ -283,6 +283,24 @@ main {
   font-weight: 700;
 }
 
+#result .confidence-score {
+  width: 100%;
+
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#result .confidence-score::-moz-progress-bar,
+#result .confidence-score::-webkit-progress-bar {
+  background-color: #eee;
+
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+#result .confidence-score::-webkit-progress-value {
+  background-color: var(--progress-value-color);
+}
 /* End of Main */
 
 /* Start of Footer */
