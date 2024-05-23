@@ -1,6 +1,7 @@
 const predictClassification = require('../services/inferenceService');
 const crypto = require('crypto');
 const storeData = require('../services/storeData');
+const getData = require('../services/getData');
 
 async function postPredictHandler(request, h) {
   const { image } = request.payload;
@@ -11,11 +12,11 @@ async function postPredictHandler(request, h) {
   const createdAt = new Date().toISOString();
 
   const data = {
-    "id": id,
-    "result": label,
-    "suggestion": suggestion,
-    "createdAt": createdAt
-  }
+    id: id,
+    result: label,
+    suggestion: suggestion,
+    createdAt: createdAt
+  };
 
   await storeData(id, data);
 
@@ -23,19 +24,27 @@ async function postPredictHandler(request, h) {
     status: 'success',
     message: 'Model is predicted successfully',
     data
-  })
+  });
   response.code(201);
   return response;
 }
 
 async function getPredictHistoriesHandler(request, h) {
-  const histories = [
-    { id: 1, result: 'Prediction 1' },
-    { id: 2, result: 'Prediction 2' }
-  ];
+  const histories = await getData();
+
+  const formattedHistories = histories.map(history => ({
+    id: history.id,
+    history: {
+      result: history.result,
+      createdAt: history.createdAt,
+      suggestion: history.suggestion,
+      id: history.id
+    }
+  }));
+
   return h.response({
     status: 'success',
-    data: histories
+    data: formattedHistories
   }).code(200);
 };
 

@@ -1,4 +1,5 @@
 const { Firestore } = require('@google-cloud/firestore');
+const dataStore = require('./dataStore');
 
 async function storeData(id, data) {
   const db = new Firestore();

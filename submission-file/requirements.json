@@ -1,0 +1,6 @@
+{
+    "backend-service-url": "https://mlgc-backend-ramadhan-3ad6mhuj4q-et.a.run.app",
+    "frontend-service-url": "https://submissionmlgc-ramadhan.et.r.appspot.com/",
+    "project-id": "submissionmlgc-ramadhan",
+    "bucket-name": "mlgc-ramadhan-bucket"
+}
